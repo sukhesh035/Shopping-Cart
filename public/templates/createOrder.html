@@ -1,0 +1,12 @@
+<div ng-controller="orderController">
+    Product 
+    <select name="" id="">
+        <option ng-repeat="product in productList">
+            {{product.name}}
+        </option>
+    </select>
+    Quantity <input type="text">
+    Color <input type="text">
+    Size <input type="text">
+    <button ng-click="saveOrder()">Continue</button>
+</div>
