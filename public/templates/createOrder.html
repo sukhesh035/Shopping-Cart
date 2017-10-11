@@ -1,12 +1,26 @@
 <div ng-controller="orderController">
-    Product 
-    <select name="" id="">
-        <option ng-repeat="product in productList">
-            {{product.name}}
-        </option>
-    </select>
-    Quantity <input type="text">
-    Color <input type="text">
-    Size <input type="text">
-    <button ng-click="saveOrder()">Continue</button>
+    <div ng-if="showOrderDetails">
+        Product
+        <select name="" id="" ng-model="orderConfig.product">
+                <option value="{{product.name}}" ng-repeat="product in productList">
+                    {{product.name}}
+                </option>
+            </select> Quantity <input type="text" ng-model="orderConfig.quantity"> Color <input type="text" ng-model="orderConfig.color">        Size <input type="text" ng-model="orderConfig.size">
+        <button ng-click="shipping()">Continue</button>
+    </div>
+    <div ng-if="!showOrderDetails">
+        <div>
+            <h2>Please confirm Shipping</h2>
+        </div>
+
+        Address <input type="text" ng-model="orderConfig.address"> City <input type="text" ng-model="orderConfig.city"> State <input type="text" ng-model="orderConfig.state"> Country <input type="text" ng-model="orderConfig.country"> Postal
+        Code <input type="text" ng-model="orderConfig.postal">
+        <div>
+            <h2>Credit Card</h2>
+        </div>
+        Card Number <input type="text" ng-model="orderConfig.card">
+        Expires <input type="text" ng-model="orderConfig.exp">
+        CVV <input type="text" ng-model="orderConfig.cvv">
+        <button ng-click="saveOrder()">Submit</button>
+    </div>
 </div>

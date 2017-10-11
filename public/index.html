@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 
@@ -15,7 +16,15 @@
 <script src="app.js"></script>
 
 <body ng-app="harish_test">
-
+    <header class="col-lg-12">
+        <nav>
+            <ul class="pull-right col-lg-4">
+                <li class="col-lg-3">Home</li>
+                <li class="col-lg-3">Products</li>
+                <li class="col-lg-3">My Orders </li>
+            </ul>
+        </nav>
+    </header>
     <div>
         <ui-view></ui-view>
     </div>

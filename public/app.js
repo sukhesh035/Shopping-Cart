@@ -23,6 +23,11 @@ app.config(function ($urlRouterProvider, $stateProvider) {
         templateUrl: 'templates/createOrder.html'
     });
 
+    $stateProvider.state('orderList', {
+        url: '/orderList',
+        templateUrl: 'templates/myOrders.html'
+    });
+
 
 });
 
@@ -45,7 +50,7 @@ app.controller("registerController", function ($scope, $http, $state) {
     }
 });
 
-app.controller("loginController", function ($scope, $http, $state) {
+app.controller("loginController", function ($scope, $http, $state, $window) {
     $scope.loginUser = function () {
         var data = {
             username: $scope.userName,
@@ -53,6 +58,8 @@ app.controller("loginController", function ($scope, $http, $state) {
         }
         $http.post("/login", data).then(function (response) {
             if (response.data) {
+                $window.localStorage["username"] = $scope.userName
+                // $localStorage.put("username":$scope.userName);
                 $state.go("products");
             } else {
 
@@ -67,8 +74,10 @@ app.controller("loginController", function ($scope, $http, $state) {
 });
 
 app.controller("orderController", function ($scope, $http, $state) {
-
-
+    $scope.orderConfig = {};
+    $scope.showOrderDetails = true;
+    $scope.showProductSection = false;
+    $scope.product = {};
     $scope.getProductList = function () {
         $http.get("/productList").then(function (resposne) {
             console.log(resposne);
@@ -81,9 +90,26 @@ app.controller("orderController", function ($scope, $http, $state) {
         $state.go("orders");
     }
 
-    $scope.saveOrder = function(){
-        $http.post("/saveOrder",data).then(function(response){
+    $scope.shipping = function () {
+        $scope.showOrderDetails = false;
+    }
+
+    $scope.saveOrder = function () {
+        $scope.orderConfig.username = localStorage.getItem("username");
+        $http.post("/saveOrder", $scope.orderConfig).then(function (response) {
             console.log(response);
+        });
+    }
+
+    $scope.addProduct = function () {
+        $http.post("/addProduct", $scope.product).then(function (response) {
+            console.log(response);
+        });
+    }
+
+    $scope.getOrderList = function(){
+        $http.get("/getOrder/"+localStorage.getItem("username")).then(function(response){
+            $scope.orderList = response.data;
         });
     }
 

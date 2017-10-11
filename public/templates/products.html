@@ -2,5 +2,10 @@
     <div ng-repeat="product in productList">
             <h3>{{product.name}}</h3>
     </div>
+    <button ng-click="showProductSection = true">Add Product</button>
+    <div ng-if="showProductSection">
+        Product Name <input type="text" ng-model="product.name">
+        <button ng-click="addProduct()">Add</button>
+    </div>
     <button ng-click="navorders()">Create Order</button>
 </div>

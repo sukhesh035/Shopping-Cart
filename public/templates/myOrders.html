@@ -1,0 +1,11 @@
+<div ng-controller="orderController">
+    <div ng-init="getOrderList()">
+        Your Orders
+        <ul>
+            <li ng-repeat="item in orderList">
+                {{item.product}}
+            </li>
+        </ul>
+    </div>
+
+</div>

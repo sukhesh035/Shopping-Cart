@@ -1,0 +1,7 @@
+header{
+    display: grid;
+}
+header ul li{
+    list-style: none;
+    float: right;
+}

@@ -41,6 +41,19 @@ app.post('/registerUser', function (req, res) {
 
 });
 
+app.get('/getOrder/:id',function(req,res){
+    userTable.find({ "username": req.params.id }, function (err, docs) {
+        res.send(200, docs[0].orders);
+    });
+});
+
+app.post('/addProduct', function (req, res) {
+        console.log(req.body);
+        productList.insert(req.body,function (err, docs) {
+            res.send(200, docs);
+        });
+    });
+
 app.get('/productList', function (req, res) {
 
     productList.find(function (err, docs) {
@@ -48,11 +61,20 @@ app.get('/productList', function (req, res) {
     });
 });
 
-app.get('/productList', function (req, res) {
-    
-    productList.find(function (err, docs) {
-        res.send(200, docs);
-    });
+app.post('/saveOrder', function (req, res) {
+    console.log(req.body);
+        userTable.update(
+            { "username": req.body.username },
+            {
+                $push: {
+                    orders: req.body
+                    
+                }
+            }
+        ,function(err,docs){
+            console.log(docs);
+        })
+
 });
 
 
